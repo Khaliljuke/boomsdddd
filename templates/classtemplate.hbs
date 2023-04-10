@@ -1,0 +1,30 @@
+import mongoose from "mongoose";
+const { Schema, model} = mongoose;
+const {{classAtt.nameSchema}} =  new Schema(
+    {
+        {{#each classAtt.attrs}}
+        {{attrName}} :{
+            type: {{attrType}},
+            required: {{attrIsRequired}}{{#if isEnum}},            
+            enum : [{{#each attrEnumList}}"{{this}}",{{/each}}]{{/if}}            
+        },
+        {{/each}}
+        {{#each r}}
+        {{#if isArray}}{{c2}}id :[{
+            type: Schema.Types.ObjectId,
+            ref: '{{c2}}',
+            required: {{isRequired}}
+            }],
+        {{else}}{{c2}}id :{
+            type: Schema.Types.ObjectId,
+            ref: '{{c2}}',
+            required: {{isRequired}}
+        },{{/if}}
+        {{/each}}
+    },
+    {
+        timestamps: true
+    }
+);
+
+export default model('{{classAtt.className}}',{{classAtt.nameSchema}});

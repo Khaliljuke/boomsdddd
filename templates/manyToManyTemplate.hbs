@@ -1,0 +1,25 @@
+import mongoose from "mongoose";
+const { Schema, model} = mongoose;
+const {{name}}Schema =  new Schema(
+    {
+        {{c1}}id:{
+            type: Schema.Types.ObjectId,
+            required: true
+        },
+        {{c2}}id:{
+            type: Schema.Types.ObjectId,
+            required: true
+        },{{#each attrs}}
+        {{attrName}} :{
+            type: {{attrType}},
+            required: {{attrIsRequired}}{{#if isEnum}},            
+            enum : [{{#each attrEnumList}}"{{this}}",{{/each}}]{{/if}}            
+        },
+        {{/each}}
+    },
+    {
+        timestamps: true
+    }
+);
+
+export default model('{{name}}',{{name}}Schema);
